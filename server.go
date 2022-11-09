@@ -28,6 +28,7 @@ func main() {
 	product := e.Group("/product")
 	product.GET("/getProduct/:id", h.GetProduct)
 	product.PUT("/editProduct", h.EditProduct)
+	product.POST("/addProduct", h.AddProduct)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
