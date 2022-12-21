@@ -26,9 +26,11 @@ func main() {
 
 	// http://localhost:1323/getProduct/1
 	product := e.Group("/product")
+	product.GET("/getProduct", h.GetAllProduct)
 	product.GET("/getProduct/:id", h.GetProduct)
 	product.PUT("/editProduct", h.EditProduct)
 	product.POST("/addProduct", h.AddProduct)
+	product.DELETE("/delProduct/:id", h.DelProduct)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

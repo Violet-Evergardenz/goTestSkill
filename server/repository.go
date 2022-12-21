@@ -11,6 +11,15 @@ import (
 	r "myapp/model/request"
 )
 
+func (h *FuncHandler) GetAllProduct(c echo.Context) error {
+	product := new([]p.Products)
+	if err := h.DB.Raw("select * from products p join brands b on p.brandId = b.brandId ").Scan(&product).Error; err != nil {
+		return c.NoContent(http.StatusNotFound)
+	}
+	log.Println(product)
+	return c.JSON(http.StatusOK, product)
+}
+
 func (h *FuncHandler) GetProduct(c echo.Context) error {
 
 	id := c.Param("id")
@@ -69,4 +78,17 @@ func (h *FuncHandler) AddProduct(c echo.Context) (err error) {
 		}
 	}
 	return c.JSON(http.StatusOK, product)
+}
+
+func (h *FuncHandler) DelProduct(c echo.Context) (err error) {
+	id := c.Param("id")
+	// h.DB.Exec("SET FOREIGN_KEY_CHECKS=0;")
+	if err := h.DB.Exec("DELETE FROM productcolor where productId = ?;", id).Error; err != nil {
+		return c.JSON(http.StatusConflict, err)
+	}
+	if err := h.DB.Exec("DELETE FROM products where productId = ?;", id).Error; err != nil {
+		return c.JSON(http.StatusConflict, err)
+	}
+	// h.DB.Exec("SET FOREIGN_KEY_CHECKS=1;")
+	return c.JSON(http.StatusOK, id)
 }
