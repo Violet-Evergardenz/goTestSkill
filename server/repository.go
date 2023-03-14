@@ -38,7 +38,7 @@ func (h *FuncHandler) EditProduct(c echo.Context) (err error) {
 	if err = c.Bind(product); err != nil {
 		return c.JSON(http.StatusBadRequest, "something wrong")
 	}
-
+	log.Println(product.ProductColors[0])
 	if err := h.DB.Raw("UPDATE products SET productName = ?, productDescription = ? , productPrice = ?,productImage = ? ,brandId = ? WHERE productId = ?;",
 		product.ProductName,
 		product.ProductDescription,
@@ -47,6 +47,18 @@ func (h *FuncHandler) EditProduct(c echo.Context) (err error) {
 		product.BrandId,
 		product.ProductId).Scan(&product).Error; err != nil {
 		return c.NoContent(http.StatusNotFound)
+	}
+	if err := h.DB.Exec("DELETE FROM productcolor where productId = ?;", product.ProductId).Error; err != nil {
+		return c.JSON(http.StatusConflict, err)
+	}
+	for i := 0; i < len(product.ProductColors); i++ {
+		if err := h.DB.Raw("INSERT INTO productcolor (productcolorId,productId,colorId) VALUES (?,?,?);",
+			product.ProductColors[i].ProductcolorId,
+			product.ProductId,
+			product.ProductColors[i].ColorId,
+		).Scan(&product).Error; err != nil {
+			return c.JSON(http.StatusConflict, err)
+		}
 	}
 	return c.JSON(http.StatusOK, product)
 }

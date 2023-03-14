@@ -32,5 +32,8 @@ func main() {
 	product.POST("/addProduct", h.AddProduct)
 	product.DELETE("/delProduct/:id", h.DelProduct)
 
+	// audio := e.Group("/audio")
+	// audio.GET("/straeming", h.PlayAudio)
+
 	e.Logger.Fatal(e.Start(":1323"))
 }
