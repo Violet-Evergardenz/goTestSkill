@@ -12,6 +12,8 @@ github.com/go-audio/riff v1.0.0/go.mod h1:l3cQwc85y79NQFCRB7TiPoNiaijp6q8Z0Uv38r
 github.com/go-audio/wav v1.0.0/go.mod h1:3yoReyQOsiARkvPl3ERCi8JFjihzG6WhjYpZCf5zAWE=
 github.com/go-sql-driver/mysql v1.6.0 h1:BCTh4TKNUYmOmMUcQ3IipzF5prigylS7XXjEkfCHuOE=
 github.com/go-sql-driver/mysql v1.6.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
+github.com/go-sql-driver/mysql v1.7.0 h1:ueSltNNllEqE3qcWBTD0iQd3IpL/6U+mJxLkazJ7YPc=
+github.com/go-sql-driver/mysql v1.7.0/go.mod h1:OXbVy3sEdcQ2Doequ6Z5BW6fXNQTmx+9S1MCJN5yJMI=
 github.com/hajimehoshi/go-mp3 v0.3.0 h1:fTM5DXjp/DL2G74HHAs/aBGiS9Tg7wnp+jkU38bHy4g=
 github.com/hajimehoshi/go-mp3 v0.3.0/go.mod h1:qMJj/CSDxx6CGHiZeCgbiq2DSUkbK0UbtXShQcnfyMM=
 github.com/hajimehoshi/oto v0.6.1/go.mod h1:0QXGEkbuJRohbJaxr7ZQSxnju7hEhseiPx2hrh6raOI=
@@ -80,6 +82,10 @@ gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b h1:h8qDotaEPuJATrMmW04NCwg7v
 gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 gorm.io/driver/mysql v1.3.6 h1:BhX1Y/RyALb+T9bZ3t07wLnPZBukt+IRkMn8UZSNbGM=
 gorm.io/driver/mysql v1.3.6/go.mod h1:sSIebwZAVPiT+27jK9HIwvsqOGKx3YMPmrA3mBJR10c=
+gorm.io/driver/mysql v1.5.0 h1:6hSAT5QcyIaty0jfnff0z0CLDjyRgZ8mlMHLqSt7uXM=
+gorm.io/driver/mysql v1.5.0/go.mod h1:FFla/fJuCvyTi7rJQd27qlNX2v3L6deTR1GgTjSOLPo=
 gorm.io/gorm v1.23.8/go.mod h1:l2lP/RyAtc1ynaTjFksBde/O8v9oOGIApu2/xRitmZk=
 gorm.io/gorm v1.23.9 h1:NSHG021i+MCznokeXR3udGaNyFyBQJW8MbjrJMVCfGw=
 gorm.io/gorm v1.23.9/go.mod h1:DVrVomtaYTbqs7gB/x2uVvqnXzv0nqjB396B8cG4dBA=
+gorm.io/gorm v1.24.7-0.20230306060331-85eaf9eeda11 h1:9qNbmu21nNThCNnF5i2R3kw2aL27U8ZwbzccNjOmW0g=
+gorm.io/gorm v1.24.7-0.20230306060331-85eaf9eeda11/go.mod h1:L4uxeKpfBml98NYqVqwAdmV1a2nBtAec/cf3fpucW/k=
