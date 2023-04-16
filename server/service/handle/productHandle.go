@@ -5,19 +5,21 @@ import (
 
 	"myapp/server/service/repository"
 
-	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )
 
-func GetAllProductHandle(c echo.Context, h *gorm.DB) *[]entity.Products {
-	var product []entity.Products
-	repository.GetAllProduct(h, &product)
-	return &product
+func GetAllProductHandle(h *gorm.DB, prods *[]entity.Products) (*[]entity.Products, error) {
+	ps, err := repository.GetAllProduct(h, prods)
+	return ps, err
 }
 
-func GetProductHandle(c echo.Context, h *gorm.DB) *entity.Products {
-	id := c.Param("id")
-	var product entity.Products
-	repository.GetProduct(h, &product, id)
-	return &product
+func GetProductHandle(h *gorm.DB, prod *entity.Products, id string) (*entity.Products, error) {
+	p, err := repository.GetProduct(h, prod, id)
+	return p, err
+}
+
+func EditProductHandle(h *gorm.DB, prodNew *entity.Products) *entity.Products {
+	// check any row before edit
+	// return nil n msgerr
+	return prodNew
 }

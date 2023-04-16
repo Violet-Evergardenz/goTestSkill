@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	"myapp/model/entity"
 	r "myapp/model/request"
 	"myapp/server/service/handle"
 
@@ -35,18 +36,23 @@ func (h *FuncHandler) Initialize() {
 }
 
 func (h *FuncHandler) GetAllProduct(c echo.Context) error {
-	res := handle.GetAllProductHandle(c, h.DB)
-	if res == nil {
+	var product []entity.Products
+	res, err := handle.GetAllProductHandle(h.DB, &product)
+	if err == nil {
 		return c.NoContent(http.StatusBadRequest)
 	}
 	return c.JSON(http.StatusOK, res)
 }
 
 func (h *FuncHandler) GetProduct(c echo.Context) error {
-	res := handle.GetProductHandle(c, h.DB)
-	if res == nil {
+	//check id ?
+	id := c.Param("id")
+	var product entity.Products
+	res, err := handle.GetProductHandle(h.DB, &product, id)
+	if err != nil {
 		return c.NoContent(http.StatusBadRequest)
-	} else if res.ProductId == 0 {
+	}
+	if res.ProductId == 0 {
 		return c.NoContent(http.StatusNotFound)
 	}
 	return c.JSON(http.StatusOK, res)
