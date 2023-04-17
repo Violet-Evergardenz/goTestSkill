@@ -1,7 +1,7 @@
 package handle
 
 import (
-	"myapp/model/entity"
+	"myapp/model/shirt/entity"
 
 	"myapp/server/service/repository"
 

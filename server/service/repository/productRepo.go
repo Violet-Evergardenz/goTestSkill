@@ -1,7 +1,9 @@
 package repository
 
 import (
-	"myapp/model/entity"
+	"myapp/model/shirt/entity"
+	"myapp/model/shirt/request"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -21,6 +23,55 @@ func GetProduct(h *gorm.DB, prod *entity.Products, id string) (*entity.Products,
 	return prod, nil
 }
 
-func DelProduct(h *gorm.DB, id string) {
+func EditProduct(h *gorm.DB, prod *entity.Products) error {
+	if err := h.Raw("UPDATE products SET productName = ?, productDescription = ? , productPrice = ?,productImage = ? ,brandId = ? WHERE productId = ?;",
+		prod.ProductName,
+		prod.ProductDescription,
+		prod.ProductPrice,
+		prod.ProductImage,
+		prod.BrandId,
+		prod.ProductId).Scan(&prod).Error; err != nil {
+		return err
+	}
+	return nil
+}
 
+func DelProductColor(h *gorm.DB, id string) error {
+	if err := h.Exec("DELETE FROM productcolor where productId = ?;", id).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func AddProductColor(h *gorm.DB, prodCl *entity.Productcolor) error {
+	if err := h.Raw("INSERT INTO productcolor (productcolorId,productId,colorId) VALUES (?,?,?);",
+		prodCl.ProductcolorId,
+		prodCl.ProductId,
+		prodCl.ColorId,
+	).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func DelProduct(h *gorm.DB, id string) error {
+	if err := h.Exec("DELETE FROM products where productId = ?;", id).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func AddProduct(h *gorm.DB, prod *request.Products) error {
+	if err := h.Raw("INSERT INTO products (productId,productName,productDescription,onsaleDate,productPrice,productImage,brandId) VALUES (?,?,?,?,?,?,?);",
+		prod.ProductId,
+		prod.ProductName,
+		prod.ProductDescription,
+		time.Now().UTC().Format("2006-01-02"),
+		prod.ProductPrice,
+		prod.ProductImage,
+		prod.BrandId,
+	).Scan(&prod).Error; err != nil {
+		return err
+	}
+	return nil
 }

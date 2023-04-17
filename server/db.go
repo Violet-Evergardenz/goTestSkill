@@ -8,8 +8,8 @@ import (
 	"os"
 	"time"
 
-	"myapp/model/entity"
-	r "myapp/model/request"
+	"myapp/model/shirt/entity"
+	r "myapp/model/shirt/request"
 	"myapp/server/service/handle"
 
 	"github.com/labstack/echo/v4"
