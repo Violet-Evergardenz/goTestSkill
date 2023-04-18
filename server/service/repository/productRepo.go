@@ -23,7 +23,7 @@ func GetProduct(h *gorm.DB, prod *entity.Products, id string) (*entity.Products,
 	return prod, nil
 }
 
-func EditProduct(h *gorm.DB, prod *entity.Products) error {
+func EditProduct(h *gorm.DB, prod *request.Products) error {
 	if err := h.Raw("UPDATE products SET productName = ?, productDescription = ? , productPrice = ?,productImage = ? ,brandId = ? WHERE productId = ?;",
 		prod.ProductName,
 		prod.ProductDescription,
@@ -43,12 +43,12 @@ func DelProductColor(h *gorm.DB, id string) error {
 	return nil
 }
 
-func AddProductColor(h *gorm.DB, prodCl *entity.Productcolor) error {
+func AddProductColor(h *gorm.DB, prodCl *request.OneProductColor) error {
 	if err := h.Raw("INSERT INTO productcolor (productcolorId,productId,colorId) VALUES (?,?,?);",
 		prodCl.ProductcolorId,
 		prodCl.ProductId,
 		prodCl.ColorId,
-	).Error; err != nil {
+	).Scan(&prodCl).Error; err != nil {
 		return err
 	}
 	return nil
