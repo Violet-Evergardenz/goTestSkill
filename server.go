@@ -5,7 +5,6 @@ import (
 	db "myapp/server"
 	"net/http"
 
-	// c "myapp/controller"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 )
@@ -15,7 +14,6 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-
 	e := echo.New()
 	h := db.FuncHandler{}
 	h.Initialize()
@@ -24,7 +22,6 @@ func main() {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 
-	// http://localhost:1323/getProduct/1
 	product := e.Group("/product")
 	product.GET("/getProduct", h.GetAllProduct)
 	product.GET("/getProduct/:id", h.GetProduct)
@@ -32,8 +29,8 @@ func main() {
 	product.POST("/addProduct", h.AddProduct)
 	product.DELETE("/delProduct/:id", h.DelProduct)
 
-	// audio := e.Group("/audio")
-	// audio.GET("/straeming", h.PlayAudio)
+	chatchak := e.Group("/chatchak")
+	chatchak.GET("/join/:id", h.JoinChatRoom)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

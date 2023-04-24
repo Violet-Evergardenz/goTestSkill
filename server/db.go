@@ -37,7 +37,7 @@ func (h *FuncHandler) Initialize() {
 func (h *FuncHandler) GetAllProduct(c echo.Context) error {
 	product := new([]entity.Products)
 	res, err := handle.GetAllProductHandle(h.DB, product)
-	if err == nil {
+	if err != nil {
 		return c.NoContent(http.StatusBadRequest)
 	}
 	return c.JSON(http.StatusOK, res)
@@ -84,6 +84,7 @@ func (h *FuncHandler) AddProduct(c echo.Context) (err error) {
 
 func (h *FuncHandler) DelProduct(c echo.Context) (err error) {
 	id := c.Param("id")
+	handle.DelProductHandle(h.DB, id)
 	// h.DB.Exec("SET FOREIGN_KEY_CHECKS=0;")
 	if err := h.DB.Exec("DELETE FROM productcolor where productId = ?;", id).Error; err != nil {
 		return c.JSON(http.StatusConflict, err)
